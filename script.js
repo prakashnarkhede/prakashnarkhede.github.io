@@ -58,7 +58,41 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-// Skil Filtering Logic
+// Animated Years Counter
+function animateCounter(element, target, duration) {
+    let start = 0;
+    const increment = target / (duration / 16);
+    
+    function updateCounter() {
+        start += increment;
+        if (start >= target) {
+            element.textContent = target;
+            return;
+        }
+        element.textContent = Math.floor(start);
+        requestAnimationFrame(updateCounter);
+    }
+    
+    updateCounter();
+}
+
+// Trigger counter when it becomes visible
+const counterElement = document.getElementById('years-counter');
+if (counterElement) {
+    const counterObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateCounter(counterElement, 15, 1500);
+                counterObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    counterObserver.observe(counterElement.closest('.experience-counter'));
+}
+
+
+// Skill Filtering Logic
 const filterBtns = document.querySelectorAll('.filter-btn');
 const skills = document.querySelectorAll('.skill-tag');
 
@@ -136,4 +170,26 @@ document.querySelectorAll('.timeline-item:not([data-tilt])').forEach(item => {
     item.style.transform = 'translateY(20px)';
     item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
     observer.observe(item);
+});
+
+
+// Philosophy cards stagger animation
+const philosophyCards = document.querySelectorAll('.philosophy-card');
+const philosophyObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+            setTimeout(() => {
+                entry.target.style.opacity = 1;
+                entry.target.style.transform = 'translateY(0)';
+            }, index * 100);
+            philosophyObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.1 });
+
+philosophyCards.forEach(card => {
+    card.style.opacity = 0;
+    card.style.transform = 'translateY(20px)';
+    card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    philosophyObserver.observe(card);
 });
