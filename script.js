@@ -1,4 +1,6 @@
-// Theme Toggling
+// ============================================================
+// Theme Toggle
+// ============================================================
 const themeToggleBtn = document.getElementById('theme-toggle');
 const body = document.body;
 const currentTheme = localStorage.getItem('theme');
@@ -21,175 +23,180 @@ themeToggleBtn.addEventListener('click', () => {
     }
 });
 
+// ============================================================
+// Mobile Nav Toggle
+// ============================================================
+const navToggle = document.getElementById('nav-toggle');
+const navLinks = document.getElementById('nav-links');
 
-// Typing Effect for the hero title
-const roles = ["Principal QA Automation Architect", "Enterprise CI/CD Expert", "AI & Cloud Automator", "Team Leader"];
-let roleIndex = 0;
-let charIndex = 0;
-let isDeleting = false;
-let typeSpeed = 100;
-const typedElement = document.getElementById('typed-text');
+if (navToggle && navLinks) {
+    navToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+    });
 
-function type() {
-    const currentRole = roles[roleIndex];
-    if (isDeleting) {
-        typedElement.innerText = currentRole.substring(0, charIndex - 1);
-        charIndex--;
-        typeSpeed = 40; 
-    } else {
-        typedElement.innerText = currentRole.substring(0, charIndex + 1);
-        charIndex++;
-        typeSpeed = 100;
-    }
-
-    if (!isDeleting && charIndex === currentRole.length) {
-        isDeleting = true;
-        typeSpeed = 2000; // Pause at end of word
-    } else if (isDeleting && charIndex === 0) {
-        isDeleting = false;
-        roleIndex = (roleIndex + 1) % roles.length;
-        typeSpeed = 500; // Pause before new word
-    }
-
-    setTimeout(type, typeSpeed);
+    // Close menu when a link is clicked
+    navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+        });
+    });
 }
-document.addEventListener("DOMContentLoaded", () => {
-    if(typedElement) setTimeout(type, 800);
-});
 
+// ============================================================
+// Obfuscated Email
+// ============================================================
+function setEmailLinks() {
+    const user = 'aec.prakash';
+    const domain = 'gmail.com';
+    const addr = user + '@' + domain;
+    const mailto = 'mailto:' + addr;
 
-// Animated Years Counter
+    const emailLink = document.getElementById('email-link');
+    const footerEmail = document.getElementById('footer-email');
+
+    if (emailLink) {
+        emailLink.href = mailto;
+        emailLink.title = addr;
+    }
+    if (footerEmail) {
+        footerEmail.href = mailto;
+        footerEmail.textContent = addr;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', setEmailLinks);
+
+// ============================================================
+// Animated Stat Counters
+// ============================================================
 function animateCounter(element, target, duration) {
     let start = 0;
     const increment = target / (duration / 16);
-    
-    function updateCounter() {
+
+    function update() {
         start += increment;
         if (start >= target) {
             element.textContent = target;
             return;
         }
         element.textContent = Math.floor(start);
-        requestAnimationFrame(updateCounter);
+        requestAnimationFrame(update);
     }
-    
-    updateCounter();
+
+    update();
 }
 
-// Trigger counter when it becomes visible
-const counterElement = document.getElementById('years-counter');
-if (counterElement) {
-    const counterObserver = new IntersectionObserver((entries) => {
+const statNumbers = document.querySelectorAll('.stat-number[data-target]');
+
+if (statNumbers.length > 0) {
+    const statsObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                animateCounter(counterElement, 15, 1500);
-                counterObserver.unobserve(entry.target);
+                const el = entry.target;
+                const target = parseInt(el.getAttribute('data-target'), 10);
+                animateCounter(el, target, 1500);
+                statsObserver.unobserve(el);
             }
         });
-    }, { threshold: 0.5 });
+    }, { threshold: 0.3 });
 
-    counterObserver.observe(counterElement.closest('.experience-counter'));
+    statNumbers.forEach(el => statsObserver.observe(el));
 }
 
+// ============================================================
+// Scroll Animations (Intersection Observer)
+// ============================================================
+const fadeElements = document.querySelectorAll('.fade-in-up');
 
-// Skill Filtering Logic
-const filterBtns = document.querySelectorAll('.filter-btn');
-const skills = document.querySelectorAll('.skill-tag');
-
-filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-        // Remove active class
-        filterBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-
-        const filterVal = btn.getAttribute('data-filter');
-
-        skills.forEach(skill => {
-            if (filterVal === 'all' || skill.getAttribute('data-category') === filterVal) {
-                skill.classList.remove('hide');
-                skill.style.position = 'relative'; 
-            } else {
-                skill.classList.add('hide');
-                setTimeout(() => {
-                    if(skill.classList.contains('hide')) skill.style.position = 'absolute';
-                }, 300);
+if (fadeElements.length > 0) {
+    const fadeObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                fadeObserver.unobserve(entry.target);
             }
         });
+    }, { threshold: 0.1 });
+
+    fadeElements.forEach(el => fadeObserver.observe(el));
+}
+
+// ============================================================
+// Strength Cards Stagger Animation
+// ============================================================
+const strengthCards = document.querySelectorAll('.strength-card');
+
+if (strengthCards.length > 0) {
+    const cardsObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }, index * 100);
+                cardsObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+
+    strengthCards.forEach(card => {
+        card.style.opacity = 0;
+        card.style.transform = 'translateY(20px)';
+        card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        cardsObserver.observe(card);
     });
-});
+}
 
+// ============================================================
+// Timeline Items Animation
+// ============================================================
+const timelineItems = document.querySelectorAll('.timeline-item');
 
-// Accordion Logic for Experience Section
-const accordionHeaders = document.querySelectorAll('.accordion-header');
-
-accordionHeaders.forEach(header => {
-    header.addEventListener('click', () => {
-        const body = header.parentElement.querySelector('.accordion-body');
-        const icon = header.querySelector('.accordion-toggle i');
-        
-        if (body.classList.contains('active')) {
-            body.classList.remove('active');
-            icon.classList.remove('fa-minus');
-            icon.classList.add('fa-plus');
-        } else {
-            // Close all others optionally
-            /*
-            document.querySelectorAll('.accordion-body.active').forEach(aBody => {
-                aBody.classList.remove('active');
-                aBody.parentElement.querySelector('.accordion-toggle i').classList.replace('fa-minus', 'fa-plus');
-            });
-            */
-            body.classList.add('active');
-            icon.classList.remove('fa-plus');
-            icon.classList.add('fa-minus');
-        }
-    });
-});
-
-
-// Intersection Observer for scroll animations
-const observerOptions = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.1
-};
-
-const observer = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = 1;
-            entry.target.style.transform = 'translateY(0)';
-            observer.unobserve(entry.target);
-        }
-    });
-}, observerOptions);
-
-document.querySelectorAll('.timeline-item:not([data-tilt])').forEach(item => {
-    // only doing this to non tilt elements to avoid clash
-    item.style.opacity = 0;
-    item.style.transform = 'translateY(20px)';
-    item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    observer.observe(item);
-});
-
-
-// Philosophy cards stagger animation
-const philosophyCards = document.querySelectorAll('.philosophy-card');
-const philosophyObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry, index) => {
-        if (entry.isIntersecting) {
-            setTimeout(() => {
+if (timelineItems.length > 0) {
+    const tlObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
                 entry.target.style.opacity = 1;
                 entry.target.style.transform = 'translateY(0)';
-            }, index * 100);
-            philosophyObserver.unobserve(entry.target);
+                tlObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+
+    timelineItems.forEach(item => {
+        item.style.opacity = 0;
+        item.style.transform = 'translateY(20px)';
+        item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        tlObserver.observe(item);
+    });
+}
+
+// ============================================================
+// Active Nav Highlight on Scroll
+// ============================================================
+const sections = document.querySelectorAll('section[id]');
+const navAnchors = document.querySelectorAll('.nav-links a');
+
+function highlightNav() {
+    const scrollY = window.scrollY + 100;
+
+    sections.forEach(section => {
+        const top = section.offsetTop;
+        const height = section.offsetHeight;
+        const id = section.getAttribute('id');
+
+        if (scrollY >= top && scrollY < top + height) {
+            navAnchors.forEach(a => {
+                a.style.color = '';
+                a.style.background = '';
+                if (a.getAttribute('href') === '#' + id) {
+                    a.style.color = 'var(--accent-color)';
+                    a.style.background = 'var(--accent-glow)';
+                }
+            });
         }
     });
-}, { threshold: 0.1 });
+}
 
-philosophyCards.forEach(card => {
-    card.style.opacity = 0;
-    card.style.transform = 'translateY(20px)';
-    card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-    philosophyObserver.observe(card);
-});
+window.addEventListener('scroll', highlightNav);
+document.addEventListener('DOMContentLoaded', highlightNav);

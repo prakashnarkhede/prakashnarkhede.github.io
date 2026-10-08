@@ -1,0 +1,201 @@
+\documentclass[11pt, a4paper]{article}
+
+% ============================================================
+% Packages
+% ============================================================
+\usepackage[margin=0.55in, top=0.45in, bottom=0.45in]{geometry}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{xcolor}
+\usepackage{parskip}
+\usepackage{multicol}
+
+% ============================================================
+% Colours and Hyperlinks
+% ============================================================
+\definecolor{headingblue}{HTML}{1a56db}
+\definecolor{rulecolor}{HTML}{cbd5e1}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=headingblue,
+    urlcolor=headingblue,
+    pdfauthor={Prakash Arun Narkhede},
+    pdftitle={Prakash Narkhede Resume, Principal QA Automation Architect},
+    pdfsubject={Resume}
+}
+
+% ============================================================
+% Section Formatting
+% ============================================================
+\titleformat{\section}{\large\bfseries\color{headingblue}}{}{0em}{}[\titlerule]
+\titlespacing*{\section}{0pt}{10pt}{6pt}
+
+\titleformat{\subsection}[runin]{\bfseries}{}{0em}{}
+\titlespacing*{\subsection}{0pt}{6pt}{4pt}
+
+% ============================================================
+% Custom Commands
+% ============================================================
+\newcommand{\roleheader}[4]{%
+    \noindent\textbf{#1} \hfill \textit{#2}\\
+    \textit{#3} \hfill #4\par\vspace{2pt}
+}
+
+\setlist[itemize]{nosep, left=0.15in, label=\textbullet, itemsep=2pt}
+
+\pagestyle{empty}
+
+% ============================================================
+\begin{document}
+
+% ============================================================
+% HEADER
+% ============================================================
+\begin{center}
+    {\LARGE\bfseries Prakash Arun Narkhede}\\[4pt]
+    Pune, India \enspace|\enspace
+    \href{mailto:aec.prakash@gmail.com}{aec.prakash@gmail.com} \enspace|\enspace
+    +(91) 8378990939 \enspace|\enspace
+    \href{https://www.linkedin.com/in/PrakashNarkhede89/}{LinkedIn} \enspace|\enspace
+    \href{https://github.com/prakashnarkhede}{GitHub} \enspace|\enspace
+    \href{https://prakashnarkhede.github.io}{prakashnarkhede.github.io}
+\end{center}
+
+% ============================================================
+% PROFESSIONAL SUMMARY
+% ============================================================
+\section{Professional Summary}
+
+Principal QA Automation Architect with 16+ years of experience building test automation platforms for enterprise SaaS products.
+Currently own the automation architecture for a Salesforce ecosystem across multiple orgs, covering Sales Cloud, integrations, APIs and downstream systems.
+Built a retrieval-augmented generation platform that writes test scenarios, cases and code, cutting test design cycle time by 30 to 40 percent.
+
+% ============================================================
+% IMPACT SNAPSHOT
+% ============================================================
+\section{Impact Snapshot}
+
+\begin{itemize}
+    \item Centralised automation framework adopted across enterprise-scale project portfolio, covering Web, API, database and Salesforce layers.
+    \item Production-grade monitoring system, built in-house, which removed the dependency on an external APM vendor.
+    \item 35\% projected reduction in test creation and maintenance effort, validated through a hands-on multi-vendor platform evaluation for a 20-engineer group.
+    \item AI test generation platform reaching 80\%+ accuracy, with human review gates on every output before hand-off.
+\end{itemize}
+
+% ============================================================
+% AI AND INNOVATION LEADERSHIP
+% ============================================================
+\section{AI and Innovation Leadership}
+
+\begin{itemize}
+    \item \textbf{RAG Test Generation Platform (Databricks)}
+    \begin{itemize}
+        \item Designed and implemented an in-house platform producing test scenarios, cases and code from requirements and metadata using hybrid retrieval. [req - scenario - tests - automation - reporting ]
+        \item Achieved 80\%+ generation accuracy and cut test design cycle time by 30 to 40\%.
+        \item Cleared enterprise architecture and security reviews; every artefact requires human review before hand-off.
+    \end{itemize}
+    \item \textbf{Testing Strategy for LLM Agents}
+    \begin{itemize}
+        \item Defined deterministic verification against systems of record for factual answers using typed comparators.
+        \item Reserved AI-graded scoring exclusively for subjective qualities (tone, relevance) since probabilistic metrics cannot gate releases.
+        \item Chose deterministic evaluation over end-to-end prompt replay to avoid model fragility and ensure clear root cause signals.
+    \end{itemize}
+    \item \textbf{Agentic IDE Test Authoring}
+    \begin{itemize}
+        \item Designed & implemented  Test Planner, Test Generator and Test Reviewer agents embedded in the IDE, saving 80\% time of automation engineers. Skill based agents, utlizing various helpers, gaurdrails.
+        \item Enforced explicit approval gates and rules preventing agents from inventing unmapped identifiers.
+    \end{itemize}
+    \item \textbf{Synthetic Test Data Agent}
+    \begin{itemize}
+        \item Built a metadata-grounded agent drawing constraints from the Salesforce metadata API.
+        \item Removed data setup bottlenecks without requiring write access to live systems.
+    \end{itemize}
+    \item \textbf{Go-To-Market QA AI Strategy}
+    \begin{itemize}
+        \item Defined and owned the AI strategy covering six workstreams and various AI agents for the test lifecycle.
+        \item Transitioned the team from ad-hoc tool use to a governed workflow with mandatory human review on all AI outputs.
+    \end{itemize}
+\end{itemize}
+
+% ============================================================
+% TECHNICAL SKILLS
+% ============================================================
+\section{Technical Skills}
+
+\begin{tabular}{@{} l p{13.5cm} @{}}
+\textbf{Test Automation}     & Copado CRT, Robot Framework, Playwright, Selenium, RestAssured, TOSCA, Cucumber \\[2pt]
+\textbf{AI Engineering}      & RAG architecture, hybrid retrieval, prompt engineering, LLM-as-judge evaluation, agent design, MCP integrations \\[2pt]
+\textbf{Salesforce}          & Sales/service Cloud, SOQL, Metadata API, JWT authentication, multi-sandbox management \\[2pt]
+\textbf{Cloud and CI/CD}     & AWS (EC2, S3, Lambda, Secrets Manager), Opsera, Jenkins, Azure DevOps, Docker \\[2pt]
+\textbf{Languages}           & Python, Java, SQL \\[2pt]
+\textbf{Test Management}     & Jira, Confluence, qTest \\
+\end{tabular}
+
+% ============================================================
+% EXPERIENCE
+% ============================================================
+\section{Experience}
+
+% --- Current Role ---
+\roleheader{Workday}{Pune, India}{Principal QA Automation Architect}{Sept 2024 to Present}
+
+\begin{itemize}
+    \item Own the automation technical strategy and quality benchmarks for the Go-To-Market technology division, setting coverage targets and review cadence for leads from all projects under Go-To-Market QA.
+    \item Architect end-to-end automation for the Salesforce ecosystem: Sales Cloud, integrations, APIs and downstream systems, spanning multiple orgs and environments.
+    \item Constructed reusable automation components in Copado CRT and Robot Framework alongside the existing TOSCA estate, building a common framework supporting multiple other projects and reducing per-project setup from weeks to days.
+    \item Wired CI/CD automation pipelines into Opsera, enabling regression runs to trigger on every deployment across four environments.
+    \item Ran a multi-vendor platform evaluation with hands-on proof of concept builds, then produced the quantified ROI model that drove the platform decision. 35\% projected reduction in creation and maintenance effort. Did not select the cheapest option because its API coverage was too narrow for the Salesforce metadata layer.
+    \item Implemented data-driven validation that record-level access restrictions on core revenue objects are enforced per persona, combining REST API assertions with UI flows across three security profiles.
+    \item Built execution report consolidation for daily scheduled runs of 10,000+ tests across Copado CRT (Robotic Testing) and TOSCA, including automated failure categorisation and Slack delivery, reducing manual analysis effort by 80\%+.
+    \item Authored automation guidelines and governance standards for the division: naming conventions, job structure, review cadence. Reduced flaky test volume by approximately 25\% in the first quarter.
+\end{itemize}
+
+% --- Wolters Kluwer ---
+\roleheader{Wolters Kluwer}{Pune, India}{Test Automation Manager}{Mar 2020 to Sept 2024}
+
+\begin{itemize}
+    \item Managed automation delivery across a suite of products including SAP ECC and Salesforce integrations, with capacity planning for eight concurrent programmes.
+    \item Developed and maintained a centralised test automation framework used by enterprise-scale projects, covering Web, API, database and Salesforce test layers.
+    \item Built a production-grade monitoring system running around the clock, eliminating the dependency on an external APM tool and cutting related operational cost by approximately 30\%.
+    \item Deployed TOSCA and Selenium WebDriver across the product portfolio, reducing manual regression cycles from five days to under two days per release.
+    \item Established CI/CD pipelines with Jenkins, Docker and Selenium Grid on AWS, handling over 2{,}000 automated test runs per week.
+\end{itemize}
+
+% --- HSBC ---
+\roleheader{HSBC Technology India}{Pune, India}{Sr. Software Engineer}{Jun 2015 to Mar 2020}
+
+\begin{itemize}
+    \item Automated regression suites for cross-border tax reporting systems (FATCA, CRS), covering 12 jurisdictions and three upstream data feeds.
+    \item Designed multiple test automation frameworks using Selenium and Cucumber, cutting manual regression effort by roughly 40\%.
+    \item Coordinated test execution and defect triage across teams in Pune, Guangzhou and London, supporting four releases per year.
+\end{itemize}
+
+% --- IBM ---
+\roleheader{IBM India}{Pune, India}{Software Engineer, Banking Client}{Apr 2012 to Mar 2015}
+
+\begin{itemize}
+    \item Executed end-to-end system integration and regression testing across mainframe and web layers, and automated mainframe test workflows using REXX, cutting overnight batch validation from six hours to under two.
+    \item Coordinated defect reports between onsite and offshore teams across three time zones for a Tier 1 banking client.
+\end{itemize}
+
+% --- Lecturer ---
+\roleheader{ISBM School of Technology}{Pune, India}{Lecturer and Business Analyst}{Jun 2010 to Mar 2012}
+
+\begin{itemize}
+    \item Taught C++ and Digital Electronics while also serving as Business Analyst for in-house IT projects, gathering requirements for College software, utilized by admin, staff \& students.
+\end{itemize}
+
+% ============================================================
+% EDUCATION AND CERTIFICATIONS
+% ============================================================
+\section{Education and Certifications}
+
+\begin{itemize}
+    \item B.E. in Electronics and Telecommunication, University of Pune.
+    \item ISTQB (Foundation and Advanced), TOSCA Architect Certified, Copado Robotic Testing Certified, Python PCEP, qTest Certified.
+\end{itemize}
+
+\end{document}
